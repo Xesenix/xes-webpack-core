@@ -1,7 +1,5 @@
-export default () => [
-  {
-    test: /\.po$/,
-    exclude: /(node_modules|bower_components)/,
-    use: [{ loader: 'json-loader' }, { loader: 'po-gettext-loader' }]
-  }
-]
+export default () => [{
+	test: /\.po$/,
+	exclude: /(node_modules|bower_components)/,
+	use: [{ loader: 'json-loader' }, { loader: 'po-gettext-loader' }],
+}];

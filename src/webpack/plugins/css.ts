@@ -1,7 +1,6 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-export default (config: any) =>
-  new ExtractTextPlugin({
-    filename: 'css/[name].css',
-    ...config
-  })
+export default (config: any = {}) =>	new ExtractTextPlugin({
+	filename: 'css/[name].css',
+	...config,
+});
