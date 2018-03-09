@@ -1,6 +1,6 @@
 {
 	"name": "xes-webpack-core",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Core configuration helpers for webpack based projects.",
 	"keywords": [],
 	"main": "dist/webpack-core.umd.js",
