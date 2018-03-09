@@ -1,4 +1,4 @@
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import path from 'path';
 import pathExists from 'path-exists';
 import webpack from 'webpack';
@@ -50,13 +50,13 @@ import merge from 'webpack-merge';
  * Pre-configured webpack configuration elements.
  */
 
+import assetsRulesFactory from './loaders/assets';
+import babelRulesFactory from './loaders/babel';
+import fontsRulesFactory from './loaders/fonts';
+import translationRulesFactory from './loaders/locale';
+import markdownRulesFactory from './loaders/markdown';
+import stylesRulesFactory from './loaders/styles';
 import cssPluginFactory from './plugins/css';
-import assetsRulesFactory from './rules/assets';
-import babelRulesFactory from './rules/babel';
-import fontsRulesFactory from './rules/fonts';
-import translationRulesFactory from './rules/locale';
-import markdownRulesFactory from './rules/markdown';
-import stylesRulesFactory from './rules/styles';
 
 const scaffoldConfig = () => {
 	const isProd = process.env.ENV === 'production';
@@ -70,10 +70,10 @@ const scaffoldConfig = () => {
 
 	console.log(`Project root path: ${chalk.blue(appConfig.projectRoot)}`);
 	console.log(`Running app name: ${chalk.blue(app)}`);
-	console.log(`Env isProd: ${chalk.blue(isProd)}`);
-	console.log(`Env isTest: ${chalk.blue(isTest)}`);
-	console.log(`Env isDev: ${chalk.blue(isDev)}`);
-	console.log(`Analyze: ${chalk.blue(analyze)}`);
+	console.log(`Env isProd: ${chalk.blue(isProd as any)}`);
+	console.log(`Env isTest: ${chalk.blue(isTest as any)}`);
+	console.log(`Env isDev: ${chalk.blue(isDev as any)}`);
+	console.log(`Analyze: ${chalk.blue(analyze as any)}`);
 	console.log('App config:', config);
 
 	const extractCssPlugin = cssPluginFactory();
