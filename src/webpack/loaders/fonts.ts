@@ -1,6 +1,7 @@
 import path from 'path';
+import { Rule } from 'webpack';
 
-export default (srcRoot: string) => {
+export default (srcRoot: string): Rule[]  => {
 	const assetPath = path.normalize(srcRoot + '/assets/');
 	const fontsPath = path.normalize(srcRoot + '/fonts/');
 	const vendorRegExp = /node_modules(\\|\/)([^\\\/]+)/;

@@ -101,7 +101,7 @@ const getEnvApp = () => process.env.APP || 'app';
  * Get project package.json content.
  */
 // tslint:disable:no-var-requires
-const packageConfig = require(path.resolve(projectRoot, './package.json'));
+const packageConfig: any = {}; // require(path.resolve(projectRoot, './package.json'));
 
 /**
  * Extract one of application configuration from package.json apps[app][key] field.

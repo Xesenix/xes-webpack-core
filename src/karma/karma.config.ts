@@ -1,9 +1,9 @@
 import { Config, ConfigOptions } from 'karma';
 import path from 'path';
-import { Configuration, NewModule } from 'webpack';
+import { Configuration, NewModule, Rule } from 'webpack';
 
 import { getAppConfig, getEnvApp } from '../app/app.config';
-import istanbulCoverageFactory from '../webpack/rules/istanbul-coverage';
+import istanbulCoverageFactory from '../webpack/loaders/istanbul-coverage';
 
 // Karma configuration
 export default (karmaConfig: Config, webpack: Configuration) => {
@@ -22,7 +22,7 @@ export default (karmaConfig: Config, webpack: Configuration) => {
 	}
 
 	(webpack.module as NewModule).rules.push(
-		...istanbulCoverageFactory(config.rootPath),
+		...(istanbulCoverageFactory(config.rootPath) as [Rule]),
 	);
 
 	/**

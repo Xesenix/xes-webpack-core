@@ -1,4 +1,6 @@
-export default (srcRoot: string) => [{
+import { Rule } from 'webpack';
+
+export default (srcRoot: string): Rule[] => [{
 	test: /\.(j|t)sx?$/,
 	use: {
 		loader: 'istanbul-instrumenter-loader',

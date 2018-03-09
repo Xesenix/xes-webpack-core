@@ -1,8 +1,10 @@
+import { Rule } from 'webpack';
+
 export default (
 	extractCssPlugin: any,
 	isProd: boolean,
 	includePaths: string[] = ['./src/styles'],
-) => [{
+): Rule[]  => [{
 	test: /\.s?css$/,
 	use: isProd
 		? extractCssPlugin.extract({
