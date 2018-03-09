@@ -30,8 +30,7 @@
 		"report-coverage": "cat ./coverage/lcov.info | coveralls",
 		"commit": "git-cz",
 		"semantic-release": "semantic-release",
-		"semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-		"prepush": "npm run test:prod && npm run build"
+		"semantic-release-prepare": "ts-node tools/semantic-release-prepare"
 	},
 	"config": {
 		"commitizen": {
@@ -64,8 +63,7 @@
 				"statements": 95
 			}
 		},
-		"collectCoverage": true,
-		"mapCoverage": true
+		"collectCoverage": true
 	},
 	"devDependencies": {
 		"colors": "^1.1.2",
