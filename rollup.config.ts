@@ -36,6 +36,7 @@ export default {
 		'karma',
 		'fs',
 		'process',
+		'path-exists',
 	],
 	watch: {
 		include: 'src/**',
