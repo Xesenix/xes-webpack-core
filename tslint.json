@@ -23,7 +23,8 @@
 		"quotemark": [true, "single", "jsx-double"],
 		"semicolon": [true, "always"],
 		"whitespace": [true, "check-branch", "check-decl", "check-operator", "check-module", "check-rest-spread", "check-type", "check-typecast", "check-type-operator"],
-		"object-literal-sort-keys": false
+		"object-literal-sort-keys": false,
+		"no-var-requires": false
 	},
 	"rulesDirectory": []
 }
