@@ -1,6 +1,6 @@
 import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
-import graph from 'rollup-plugin-graph';
+// import graph from 'rollup-plugin-graph';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
 import resolve from 'rollup-plugin-node-resolve';
@@ -78,6 +78,6 @@ export default {
 		 *
 		 * @see https://github.com/ondras/rollup-plugin-graph
 		 */
-		graph(),
+		// graph({ prune: true }),
 	],
 };
