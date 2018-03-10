@@ -1,6 +1,6 @@
 import { Rule } from 'webpack';
 
-export default (): Rule[]  => [
+export const shaderRulesFactory = (): Rule[] => [
 	{ test: /\.(glsl|frag|vert)$/, loader: 'raw-loader' },
 	{ test: /\.(glsl|frag|vert)$/, loader: 'glslify' },
 ];

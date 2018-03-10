@@ -1,6 +1,6 @@
 import { Rule } from 'webpack';
 
-export default (): Rule[]  => [{
+export const babelRulesFactory = (): Rule[] => [{
 	test: /\.(t|j)sx?$/,
 	exclude: /(node_modules|bower_components)/,
 	use: {

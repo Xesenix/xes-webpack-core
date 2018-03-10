@@ -1,4 +1,4 @@
-import path from 'path';
+import * as path from 'path';
 
 export interface IAppConfig {
 	/**
@@ -90,25 +90,25 @@ export interface IAppConfig {
 /**
  * Absolute path to project root.
  */
-const projectRoot = path.resolve('./');
+export const projectRoot = path.resolve('./');
 
 /**
  * Get current application name from environment.
  */
-const getEnvApp = () => process.env.APP || 'app';
+export const getEnvApp = () => process.env.APP || 'app';
 
 /**
  * Get project package.json content.
  */
 // tslint:disable:no-var-requires
-const packageConfig: any = {}; // require(path.resolve(projectRoot, './package.json'));
+export const packageConfig: any = require(path.resolve(projectRoot, './package.json'));
 
 /**
- * Extract one of application configuration from package.json apps[app][key] field.
+ * Creates helper for extracting one of application configuration values from package.json apps[app] field.
  *
  * @param string app application configuration key
  */
-const retrievePackageAppConfig = (app: string) =>
+export const retrievePackageAppConfig = (app: string) =>
 	packageConfig.apps && packageConfig.apps[app]
 		? (key: string, defaultValue: any) =>
 				packageConfig.apps[app][key]
@@ -117,12 +117,12 @@ const retrievePackageAppConfig = (app: string) =>
 		: (key: string, defaultValue: any) => defaultValue;
 
 /**
- * Extract all application configuration from package.json apps[app] field.
+ * Extracts all application configuration from package.json apps[app] field.
  * Fill missing with default data and fix paths.
  *
  * @param string app application configuration key
  */
-const getAppConfig = (app: string): IAppConfig => {
+export const getAppConfig = (app: string): IAppConfig => {
 	const config: IAppConfig = {} as IAppConfig;
 
 	// helpers
@@ -165,12 +165,4 @@ const getAppConfig = (app: string): IAppConfig => {
 	);
 
 	return config;
-};
-
-export {
-	getEnvApp,
-	projectRoot,
-	packageConfig,
-	retrievePackageAppConfig,
-	getAppConfig,
 };

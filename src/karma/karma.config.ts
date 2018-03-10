@@ -1,12 +1,12 @@
 import { Config, ConfigOptions } from 'karma';
-import path from 'path';
+import * as path from 'path';
 import { Configuration, NewModule, Rule } from 'webpack';
 
 import { getAppConfig, getEnvApp } from '../app/app.config';
-import istanbulCoverageFactory from '../webpack/loaders/istanbul-coverage';
+import { istanbulCoverageFactory } from '../webpack/loaders/istanbul-coverage';
 
 // Karma configuration
-export default (karmaConfig: Config, webpack: Configuration) => {
+export const karmaConfigurator = (karmaConfig: Config, webpack: Configuration) => {
 	const app = getEnvApp();
 	const config = getAppConfig(app);
 

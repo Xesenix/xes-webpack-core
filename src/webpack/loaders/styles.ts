@@ -1,10 +1,10 @@
 import { Rule } from 'webpack';
 
-export default (
+export const stylesRulesFactory = (
 	extractCssPlugin: any,
 	isProd: boolean,
 	includePaths: string[] = ['./src/styles'],
-): Rule[]  => [{
+): Rule[] => [{
 	test: /\.s?css$/,
 	use: isProd
 		? extractCssPlugin.extract({

@@ -1,6 +1,6 @@
 import { Rule } from 'webpack';
 
-export default (srcRoot: string): Rule[] => [{
+export const istanbulCoverageFactory = (srcRoot: string): Rule[] => [{
 	test: /\.(j|t)sx?$/,
 	use: {
 		loader: 'istanbul-instrumenter-loader',

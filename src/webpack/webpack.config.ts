@@ -1,9 +1,7 @@
 import chalk from 'chalk';
-import path from 'path';
-import pathExists from 'path-exists';
+import * as path from 'path';
+import * as pathExists from 'path-exists';
 import webpack from 'webpack';
-
-import * as appConfig from '../app/app.config';
 
 /**
  * Handling page template.
@@ -46,19 +44,17 @@ import HtmlCriticalPlugin from 'html-critical-webpack-plugin';
  */
 import merge from 'webpack-merge';
 
-/**
- * Pre-configured webpack configuration elements.
- */
+import { assetsRulesFactory } from './loaders/assets';
+import { babelRulesFactory } from './loaders/babel';
+import { fontsRulesFactory } from './loaders/fonts';
+import { translationRulesFactory } from './loaders/locale';
+import { markdownRulesFactory } from './loaders/markdown';
+import { stylesRulesFactory } from './loaders/styles';
+import { cssPluginFactory } from './plugins/css';
 
-import assetsRulesFactory from './loaders/assets';
-import babelRulesFactory from './loaders/babel';
-import fontsRulesFactory from './loaders/fonts';
-import translationRulesFactory from './loaders/locale';
-import markdownRulesFactory from './loaders/markdown';
-import stylesRulesFactory from './loaders/styles';
-import cssPluginFactory from './plugins/css';
+import * as appConfig from '../app/app.config';
 
-const scaffoldConfig = () => {
+export const scaffoldConfig = () => {
 	const isProd = process.env.ENV === 'production';
 	const isTest = process.env.ENV === 'test';
 	const isDev = process.env.ENV === 'development';
@@ -279,5 +275,3 @@ const scaffoldConfig = () => {
 
 	return webpackConfig;
 };
-
-export { scaffoldConfig };
