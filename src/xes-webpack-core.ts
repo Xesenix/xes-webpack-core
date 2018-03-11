@@ -16,9 +16,11 @@ import { cssPluginFactory } from './webpack/plugins/css';
 
 import * as webpack from './webpack/webpack.config';
 
+import * as i18n from './i18n/extractor';
 
 const library = {
 	application,
+	i18n,
 	karma,
 	webpack: {
 		...webpack,
