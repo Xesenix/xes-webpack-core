@@ -913,6 +913,9 @@ img { max-width: 100%; }
 			<a href="iappconfig.html" class="tsd-kind-icon">IApp<wbr>Config</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="iappconfig.html#app" class="tsd-kind-icon">app</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="iappconfig.html#assets" class="tsd-kind-icon">assets</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -923,6 +926,9 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="iappconfig.html#localesdir" class="tsd-kind-icon">locales<wbr>Dir</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="iappconfig.html#localesextractdirs" class="tsd-kind-icon">locales<wbr>Extract<wbr>Dirs</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="iappconfig.html#main" class="tsd-kind-icon">main</a>
@@ -975,13 +981,16 @@ img { max-width: 100%; }
 			<a href="../globals.html#babelrulesfactory" class="tsd-kind-icon">babel<wbr>Rules<wbr>Factory</a>
 		</li>
 		<li class=" tsd-kind-function">
+			<a href="../globals.html#configure" class="tsd-kind-icon">configure</a>
+		</li>
+		<li class=" tsd-kind-function">
 			<a href="../globals.html#csspluginfactory" class="tsd-kind-icon">css<wbr>Plugin<wbr>Factory</a>
 		</li>
 		<li class=" tsd-kind-function">
-			<a href="../globals.html#fontsrulesfactory" class="tsd-kind-icon">fonts<wbr>Rules<wbr>Factory</a>
+			<a href="../globals.html#extractappconfig" class="tsd-kind-icon">extract<wbr>App<wbr>Config</a>
 		</li>
 		<li class=" tsd-kind-function">
-			<a href="../globals.html#getappconfig" class="tsd-kind-icon">get<wbr>App<wbr>Config</a>
+			<a href="../globals.html#fontsrulesfactory" class="tsd-kind-icon">fonts<wbr>Rules<wbr>Factory</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="../globals.html#getenvapp" class="tsd-kind-icon">get<wbr>Env<wbr>App</a>
@@ -990,16 +999,10 @@ img { max-width: 100%; }
 			<a href="../globals.html#istanbulcoveragefactory" class="tsd-kind-icon">istanbul<wbr>Coverage<wbr>Factory</a>
 		</li>
 		<li class=" tsd-kind-function">
-			<a href="../globals.html#karmaconfigurator" class="tsd-kind-icon">karma<wbr>Configurator</a>
-		</li>
-		<li class=" tsd-kind-function">
 			<a href="../globals.html#markdownrulesfactory" class="tsd-kind-icon">markdown<wbr>Rules<wbr>Factory</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="../globals.html#retrievepackageappconfig" class="tsd-kind-icon">retrieve<wbr>Package<wbr>App<wbr>Config</a>
-		</li>
-		<li class=" tsd-kind-function">
-			<a href="../globals.html#scaffoldconfig" class="tsd-kind-icon">scaffold<wbr>Config</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="../globals.html#shaderrulesfactory" class="tsd-kind-icon">shader<wbr>Rules<wbr>Factory</a>
@@ -1009,6 +1012,12 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="../globals.html#translationrulesfactory" class="tsd-kind-icon">translation<wbr>Rules<wbr>Factory</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="../globals.html#webpackconfigfactory" class="tsd-kind-icon">webpack<wbr>Config<wbr>Factory</a>
+		</li>
+		<li class=" tsd-kind-object-literal">
+			<a href="../globals.html#library" class="tsd-kind-icon">library</a>
 		</li>
 	</ul>
 </nav>
@@ -1029,10 +1038,12 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iappconfig.html#app" class="tsd-kind-icon">app</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iappconfig.html#assets" class="tsd-kind-icon">assets</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iappconfig.html#fonts" class="tsd-kind-icon">fonts</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iappconfig.html#languages" class="tsd-kind-icon">languages</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iappconfig.html#localesdir" class="tsd-kind-icon">locales<wbr>Dir</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iappconfig.html#localesextractdirs" class="tsd-kind-icon">locales<wbr>Extract<wbr>Dirs</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iappconfig.html#main" class="tsd-kind-icon">main</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iappconfig.html#moduleimportpaths" class="tsd-kind-icon">module<wbr>Import<wbr>Paths</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iappconfig.html#outdir" class="tsd-kind-icon">out<wbr>Dir</a></li>
@@ -1053,17 +1064,32 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="app" class="tsd-anchor"></a>
+				<h3>app</h3>
+				<div class="tsd-signature tsd-kind-icon">app<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L7">app/app.config.ts:7</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Application key used to extract configuration from package.json apps field.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="assets" class="tsd-anchor"></a>
 				<h3>assets</h3>
 				<div class="tsd-signature tsd-kind-icon">assets<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L49">app/app.config.ts:49</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L54">app/app.config.ts:54</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>all asset and resource you want to move to build assets directory
+						<p>All asset and resource you want to move to build assets directory
 							you can use glob patterns or just link to directory
 						(relative to package.apps.[appName].rootDir)</p>
 					</div>
@@ -1075,12 +1101,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">fonts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L55">app/app.config.ts:55</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L60">app/app.config.ts:60</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>all fonts resource you want to move to build fonts directory
+						<p>All fonts resource you want to move to build fonts directory
 						you can use glob patterns or just link to directory</p>
 					</div>
 				</div>
@@ -1091,12 +1117,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">languages<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L70">app/app.config.ts:70</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L75">app/app.config.ts:75</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>list of languages that will be used by application</p>
+						<p>List of languages that will be used by application</p>
 					</div>
 				</div>
 			</section>
@@ -1106,12 +1132,27 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">locales<wbr>Dir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L87">app/app.config.ts:87</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L85">app/app.config.ts:85</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>directory for storing translations (relative to package.apps.[appName].rootDir)</p>
+						<p>Directory for storing translations (relative to package.apps.[appName].rootDir)</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="localesextractdirs" class="tsd-anchor"></a>
+				<h3>locales<wbr>Extract<wbr>Dirs</h3>
+				<div class="tsd-signature tsd-kind-icon">locales<wbr>Extract<wbr>Dirs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L80">app/app.config.ts:80</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>List of paths relative to project root from which to extract translations</p>
 					</div>
 				</div>
 			</section>
@@ -1121,12 +1162,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">main<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L27">app/app.config.ts:27</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L32">app/app.config.ts:32</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>entry points to your application (relative to package.apps.[appName].rootDir)</p>
+						<p>Entry points to your application (relative to package.apps.[appName].rootDir)</p>
 					</div>
 				</div>
 			</section>
@@ -1136,12 +1177,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">module<wbr>Import<wbr>Paths<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L42">app/app.config.ts:42</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L47">app/app.config.ts:47</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>list of paths (relative to project root) on which to look for imported modules when calling import or require directives</p>
+						<p>List of paths (relative to project root) on which to look for imported modules when calling import or require directives</p>
 					</div>
 				</div>
 			</section>
@@ -1151,9 +1192,14 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">out<wbr>Dir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L12">app/app.config.ts:12</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L17">app/app.config.ts:17</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Destination path for build result.</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="outpath" class="tsd-anchor"></a>
@@ -1161,9 +1207,14 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">out<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L22">app/app.config.ts:22</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L27">app/app.config.ts:27</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>System path to build destination.</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="rootdir" class="tsd-anchor"></a>
@@ -1171,9 +1222,14 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">root<wbr>Dir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L7">app/app.config.ts:7</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L12">app/app.config.ts:12</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Application root directory relative to project root.</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="rootpath" class="tsd-anchor"></a>
@@ -1181,9 +1237,14 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">root<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L17">app/app.config.ts:17</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L22">app/app.config.ts:22</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>System path to application root directory.</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="styles" class="tsd-anchor"></a>
@@ -1191,12 +1252,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">styles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L60">app/app.config.ts:60</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L65">app/app.config.ts:65</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>list of entry point stylesheets</p>
+						<p>List of entry point stylesheets</p>
 					</div>
 				</div>
 			</section>
@@ -1206,12 +1267,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">styles<wbr>Import<wbr>Paths<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L65">app/app.config.ts:65</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L70">app/app.config.ts:70</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>list of paths (relative to package.apps.[appName].rootDir) on which to look when importing stylesheet via @import</p>
+						<p>List of paths (relative to package.apps.[appName].rootDir) on which to look when importing stylesheet via @import</p>
 					</div>
 				</div>
 			</section>
@@ -1221,12 +1282,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L75">app/app.config.ts:75</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L90">app/app.config.ts:90</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>html template that you want to use as template for website</p>
+						<p>HTML template that you want to use as template for application rendering.</p>
 					</div>
 				</div>
 			</section>
@@ -1236,12 +1297,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">template<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L82">app/app.config.ts:82</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L97">app/app.config.ts:97</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>html template is handled by ejs loader so you can put here additional data
+						<p>HTML template is handled by ejs loader so you can put here additional data
 							that will be passed to htmlWebpackPlugin.options.data you can also access
 						package.json from htmlWebpackPlugin.options.packageConfig</p>
 					</div>
@@ -1253,12 +1314,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">test<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L32">app/app.config.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L37">app/app.config.ts:37</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>entry point for tests (relative to package.apps.[appName].rootDir)</p>
+						<p>Entry point for tests (relative to package.apps.[appName].rootDir)</p>
 					</div>
 				</div>
 			</section>
@@ -1268,12 +1329,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">vendor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/5dba306/src/app/app.config.ts#L37">app/app.config.ts:37</a></li>
+						<li>Defined in <a href="https://github.com/Xesenix/xes-webpack-core/blob/af31bec/src/app/app.config.ts#L42">app/app.config.ts:42</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>all vendor scripts you want to push to vendor bundle</p>
+						<p>All vendor scripts you want to push to vendor bundle</p>
 					</div>
 				</div>
 			</section>
