@@ -2,14 +2,14 @@ import { Config, ConfigOptions } from 'karma';
 import * as path from 'path';
 import { Configuration, NewModule, Rule } from 'webpack';
 
-import { getAppConfig, getEnvApp } from '../app/app.config';
+import { extractAppConfig, IAppConfig } from '../app/app.config';
 import { istanbulCoverageFactory } from '../webpack/loaders/istanbul-coverage';
 
-// Karma configuration
-export const karmaConfigurator = (karmaConfig: Config, webpack: Configuration) => {
-	const app = getEnvApp();
-	const config = getAppConfig(app);
-
+export const configure = (
+	karmaConfig: Config,
+	webpack: Configuration,
+) => {
+	const config: IAppConfig = extractAppConfig();
 	const entry: string = path.join(config.rootDir, config.test);
 
 	// add required configuration for webpack

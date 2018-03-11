@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import * as path from 'path';
 import * as pathExists from 'path-exists';
-import webpack from 'webpack';
+import * as baseWebpack from 'webpack';
 
 /**
  * Handling page template.
@@ -52,19 +52,20 @@ import { markdownRulesFactory } from './loaders/markdown';
 import { stylesRulesFactory } from './loaders/styles';
 import { cssPluginFactory } from './plugins/css';
 
-import * as appConfig from '../app/app.config';
+import { extractAppConfig, getEnvApp, IAppConfig, packageConfig, projectRoot } from '../app/app.config';
 
-export const scaffoldConfig = () => {
-	const isProd = process.env.ENV === 'production';
-	const isTest = process.env.ENV === 'test';
-	const isDev = process.env.ENV === 'development';
-	const hmr = !!process.env.HMR;
-	const analyze = !!process.env.ANALYZE;
-	const app = appConfig.getEnvApp();
-	const { projectRoot, packageConfig } = appConfig;
-	const config = appConfig.getAppConfig(app);
-
-	console.log(`Project root path: ${chalk.blue(appConfig.projectRoot)}`);
+export const webpackConfigFactory = ({
+	isProd = process.env.ENV === 'production',
+	isTest = process.env.ENV === 'test',
+	isDev = process.env.ENV === 'development',
+	hmr = !!process.env.HMR,
+	analyze = !!process.env.ANALYZE,
+	app = getEnvApp(),
+	config = extractAppConfig(),
+	// order of chunks is important for style overriding (more specific styles source later)
+	chunks = ['vendor', 'styles', 'main'],
+} = {}) => {
+	console.log(`Project root path: ${chalk.blue(projectRoot)}`);
 	console.log(`Running app name: ${chalk.blue(app)}`);
 	console.log(`Env isProd: ${chalk.blue(isProd as any)}`);
 	console.log(`Env isTest: ${chalk.blue(isTest as any)}`);
@@ -73,9 +74,6 @@ export const scaffoldConfig = () => {
 	console.log('App config:', config);
 
 	const extractCssPlugin = cssPluginFactory();
-
-	// order of chunks is important for style overriding (more specific styles source later)
-	const chunks = ['vendor', 'styles', 'main'];
 
 	/**
 	 * Setup generation of html template in which all scripts and styles are included.
@@ -163,7 +161,7 @@ export const scaffoldConfig = () => {
 			isTest ? null : htmlPlugin,
 			isTest ? null : extractCssPlugin,
 			!isProd ? null : htmlCriticalPlugin,
-			new webpack.LoaderOptionsPlugin({
+			new baseWebpack.LoaderOptionsPlugin({
 				minimize: isProd,
 				debug: !isProd,
 				sourceMap: !isProd,
@@ -199,10 +197,10 @@ export const scaffoldConfig = () => {
 						verbose: isDev,
 					}),
 			new DotenvWebpackPlugin({ path: '.env', silent: true }),
-			new webpack.EnvironmentPlugin({
+			new baseWebpack.EnvironmentPlugin({
 				NODE_ENV: isProd ? 'production' : isTest ? 'test' : 'development',
 			}),
-			new webpack.DefinePlugin({
+			new baseWebpack.DefinePlugin({
 				'process.env.PRODUCTION': JSON.stringify(isProd),
 				'process.env.DEVELOPMENT': JSON.stringify(isDev),
 				'process.env.TEST': JSON.stringify(isTest),
@@ -238,7 +236,7 @@ export const scaffoldConfig = () => {
 			 * Also needed for testing with rewiremock
 			 * @see https://github.com/theKashey/rewiremock#to-run-inside-webpack-enviroment
 			 */
-			isDev || hmr || isTest ? new webpack.NamedModulesPlugin() : null,
+			isDev || hmr || isTest ? new baseWebpack.NamedModulesPlugin() : null,
 
 			/**
 			 * Coding without reloading pages requires this plugin.
@@ -246,13 +244,13 @@ export const scaffoldConfig = () => {
 			 * Additionally it is required for testing with rewiremock.
 			 * @see https://github.com/theKashey/rewiremock#to-run-inside-webpack-enviroment
 			 */
-			isDev && hmr ? new webpack.HotModuleReplacementPlugin() : null,
+			isDev && hmr ? new baseWebpack.HotModuleReplacementPlugin() : null,
 
 			/**
 			 * Use the NoEmitOnErrorsPlugin to skip the emitting phase whenever there are errors while compiling.
 			 * This ensures that no assets are emitted that include errors. The emitted flag in the stats is false for all assets.
 			 */
-			isTest ? null : new webpack.NoEmitOnErrorsPlugin(),
+			isTest ? null : new baseWebpack.NoEmitOnErrorsPlugin(),
 
 			/**
 			 * For splitting scripts coming from node_modules into separate chunk `vendor`
@@ -260,7 +258,7 @@ export const scaffoldConfig = () => {
 			 */
 			isTest
 				? null
-				: new webpack.optimize.CommonsChunkPlugin({
+				: new baseWebpack.optimize.CommonsChunkPlugin({
 						name: 'vendor',
 						minChunks: ({ resource }: { resource: string }) => /node_modules/.test(resource),
 					}),

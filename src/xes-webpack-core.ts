@@ -1,14 +1,41 @@
-export * from './app/app.config';
+import { NewLoaderRule, NewUseRule, OldLoaderRule, OldUseRule, OneOfRule, RulesRule } from 'webpack';
 
-export * from './karma/karma.config';
+import * as application from './app/app.config';
 
-export * from './webpack/loaders/assets';
-export * from './webpack/loaders/babel';
-export * from './webpack/loaders/fonts';
-export * from './webpack/loaders/istanbul-coverage';
-export * from './webpack/loaders/locale';
-export * from './webpack/loaders/markdown';
-export * from './webpack/loaders/shaders';
-export * from './webpack/loaders/styles';
+import * as karma from './karma/karma.config';
 
-export * from './webpack/webpack.config';
+import { assetsRulesFactory } from './webpack/loaders/assets';
+import { babelRulesFactory } from './webpack/loaders/babel';
+import { fontsRulesFactory } from './webpack/loaders/fonts';
+import { istanbulCoverageFactory } from './webpack/loaders/istanbul-coverage';
+import { translationRulesFactory } from './webpack/loaders/locale';
+import { markdownRulesFactory } from './webpack/loaders/markdown';
+import { shaderRulesFactory } from './webpack/loaders/shaders';
+import { stylesRulesFactory } from './webpack/loaders/styles';
+import { cssPluginFactory } from './webpack/plugins/css';
+
+import * as webpack from './webpack/webpack.config';
+
+
+const library = {
+	application,
+	karma,
+	webpack: {
+		...webpack,
+		loaders: {
+			assetsRulesFactory,
+			babelRulesFactory,
+			fontsRulesFactory,
+			istanbulCoverageFactory,
+			translationRulesFactory,
+			markdownRulesFactory,
+			shaderRulesFactory,
+			stylesRulesFactory,
+		},
+		plugins: {
+			cssPluginFactory,
+		},
+	},
+};
+
+export default library;

@@ -37,6 +37,8 @@ export default {
 		'fs',
 		'process',
 		'path-exists',
+		'mkdirp',
+		'gettext-extractor',
 	],
 	watch: {
 		include: 'src/**',
