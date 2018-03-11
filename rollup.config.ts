@@ -31,6 +31,7 @@ export default {
 		'html-critical-webpack-plugin',
 		'webpack-merge',
 		'rewiremock',
+		'rewiremock/webpack/plugin',
 		'path',
 		'chalk',
 		'karma',

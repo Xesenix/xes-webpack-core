@@ -40,6 +40,11 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import HtmlCriticalPlugin from 'html-critical-webpack-plugin';
 
 /**
+ *
+ */
+import RewiremockPlugin from 'rewiremock/webpack/plugin';
+
+/**
  * Merge any additional project specific webpack configuration.
  */
 import merge from 'webpack-merge';
@@ -267,7 +272,7 @@ export const webpackConfigFactory = ({
 			 * needed for rewiremock
 			 * @see https://github.com/theKashey/rewiremock#to-run-inside-webpack-enviroment
 			 */
-			isTest ? new (require('rewiremock/webpack/plugin'))() : null,
+			isTest ? new RewiremockPlugin() : null,
 		].filter((p) => !!p),
 	};
 
