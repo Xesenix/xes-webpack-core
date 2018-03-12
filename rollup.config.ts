@@ -40,6 +40,8 @@ export default {
 		'path-exists',
 		'mkdirp',
 		'gettext-extractor',
+		'babel-plugin-transform-decorators-legacy',
+		'babel-plugin-transform-class-properties',
 	],
 	watch: {
 		include: 'src/**',
