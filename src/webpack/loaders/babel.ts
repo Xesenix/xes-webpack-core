@@ -5,8 +5,9 @@ export const babelRulesFactory = (useBabelrc = false): Rule[] => [{
 	exclude: /(node_modules|bower_components)/,
 	use: {
 		loader: 'babel-loader',
-		options: useBabelrc ? {} : {
+		options: {
 			compact: false,
+			babelrc: !useBabelrc,
 			presets: [
 				['@babel/preset-env', {
 					targets: {
