@@ -1,13 +1,13 @@
 import { Rule } from 'webpack';
 
-export const babelRulesFactory = (useBabelrc = false): Rule[] => [{
+export const babelRulesFactory = (babelrc = false): Rule[] => [{
 	test: /\.(t|j)sx?$/,
 	exclude: /(node_modules|bower_components)/,
 	use: {
 		loader: 'babel-loader',
 		options: {
+			babelrc,
 			compact: false,
-			babelrc: !useBabelrc,
 			presets: [
 				['@babel/preset-env', {
 					targets: {
