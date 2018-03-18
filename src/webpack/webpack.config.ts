@@ -65,6 +65,7 @@ export const webpackConfigFactory = ({
 	isDev = process.env.ENV === 'development',
 	hmr = !!process.env.HMR,
 	analyze = !!process.env.ANALYZE,
+	useBabelrc = false,
 	app = getEnvApp(),
 	config = extractAppConfig(),
 	// order of chunks is important for style overriding (more specific styles source later)
@@ -157,7 +158,7 @@ export const webpackConfigFactory = ({
 					isProd,
 					config.stylesImportPaths,
 				),
-				...babelRulesFactory(),
+				...babelRulesFactory(useBabelrc),
 				...markdownRulesFactory(),
 				...translationRulesFactory(),
 			],

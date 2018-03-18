@@ -42,6 +42,7 @@ export default {
 		'gettext-extractor',
 		'babel-plugin-transform-decorators-legacy',
 		'babel-plugin-transform-class-properties',
+		'babel-plugin-transform-object-rest-spread',
 	],
 	watch: {
 		include: 'src/**',
