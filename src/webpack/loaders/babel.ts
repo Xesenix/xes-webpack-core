@@ -21,6 +21,7 @@ export const babelRulesFactory = (babelrc = false): Rule[] => [{
 				}],
 				'@babel/preset-react',
 				'@babel/preset-typescript',
+				'@babel/preset-stage-3',
 			],
 			plugins: [
 				require('babel-plugin-transform-decorators-legacy'),
