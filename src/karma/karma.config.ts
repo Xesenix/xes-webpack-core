@@ -6,8 +6,8 @@ import { extractAppConfig, IAppConfig } from '../app/app.config';
 import { istanbulCoverageFactory } from '../webpack/loaders/istanbul-coverage';
 
 export const configure = (
-	karmaConfig: Config,
 	webpack: Configuration,
+	useReactSourceMapFix: boolean = true,
 ) => {
 	const config: IAppConfig = extractAppConfig();
 	const entry: string = path.join(config.rootDir, config.test);
@@ -144,5 +144,5 @@ export const configure = (
 		options.browsers = ['Chrome_travis_ci'];
 	}
 
-	karmaConfig.set(options);
+	return options;
 };
