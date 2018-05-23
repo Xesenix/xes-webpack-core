@@ -111,7 +111,6 @@
 		"@types/enzyme": "^3.1.9",
 		"@types/enzyme-adapter-react-16": "^1.0.2",
 		"@types/istanbul": "^0.4.29",
-		"@types/jasmine": "^2.8.6",
 		"@types/jasmine-enzyme": "^3.6.3",
 		"@types/karma": "^1.7.3",
 		"@types/karma-coverage": "^0.5.33",
