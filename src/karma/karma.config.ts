@@ -29,7 +29,7 @@ export const configure = (
 	 * cheap-module-source-map - fixing react cross origin suggested in:
 	 * @see https://reactjs.org/docs/cross-origin-errors.html
 	 */
-	webpack.devtool = 'cheap-module-source-map';
+	if (useReactSourceMapFix) webpack.devtool = 'cheap-module-source-map';
 
 	const options: ConfigOptions & {
 		webpack?: Configuration
@@ -76,8 +76,6 @@ export const configure = (
 		},
 
 		webpack,
-
-		webpackMiddleware: {},
 
 		/**
 		 * test results reporter to use
