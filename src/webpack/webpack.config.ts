@@ -39,16 +39,6 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
  */
 import HtmlCriticalPlugin from 'html-critical-webpack-plugin';
 
-/**
- *
- */
-import RewiremockPlugin from 'rewiremock/webpack/plugin';
-
-/**
- * Merge any additional project specific webpack configuration.
- */
-import merge from 'webpack-merge';
-
 import { assetsRulesFactory } from './loaders/assets';
 import { babelRulesFactory } from './loaders/babel';
 import { fontsRulesFactory } from './loaders/fonts';
@@ -268,12 +258,6 @@ export const webpackConfigFactory = ({
 						name: 'vendor',
 						minChunks: ({ resource }: { resource: string }) => /node_modules/.test(resource),
 					}),
-
-			/**
-			 * needed for rewiremock
-			 * @see https://github.com/theKashey/rewiremock#to-run-inside-webpack-enviroment
-			 */
-			isTest ? new RewiremockPlugin() : null,
 		].filter((p) => !!p),
 	};
 

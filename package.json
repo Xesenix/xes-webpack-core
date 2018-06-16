@@ -190,7 +190,6 @@
 		"react": "^16.0.0",
 		"react-dom": "^16.0.0",
 		"react-hot-loader": "^4.0.0",
-		"react-test-renderer": "^16.2.0",
-		"rewiremock": "github:xesenix/rewiremock"
+		"react-test-renderer": "^16.2.0"
 	}
 }
