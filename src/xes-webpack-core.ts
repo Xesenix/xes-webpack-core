@@ -1,5 +1,3 @@
-import { NewLoaderRule, NewUseRule, OldLoaderRule, OldUseRule, OneOfRule, RulesRule } from 'webpack';
-
 import * as application from './app/app.config';
 
 import * as karma from './karma/karma.config';

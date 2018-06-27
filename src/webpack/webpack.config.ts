@@ -1,3 +1,4 @@
+console.log('=== webpack');
 import chalk from 'chalk';
 import * as path from 'path';
 import * as pathExists from 'path-exists';
@@ -47,7 +48,7 @@ import { markdownRulesFactory } from './loaders/markdown';
 import { stylesRulesFactory } from './loaders/styles';
 import { cssPluginFactory } from './plugins/css';
 
-import { extractAppConfig, getEnvApp, IAppConfig, packageConfig, projectRoot } from '../app/app.config';
+import { extractAppConfig, getEnvApp, getPackageConfig, IAppConfig, projectRoot } from '../app/app.config';
 
 export const webpackConfigFactory = ({
 	isProd = process.env.ENV === 'production',
@@ -58,9 +59,21 @@ export const webpackConfigFactory = ({
 	useBabelrc = false,
 	app = getEnvApp(),
 	config = extractAppConfig(),
+	packageConfig = getPackageConfig(),
 	// order of chunks is important for style overriding (more specific styles source later)
 	chunks = ['vendor', 'styles', 'main'],
-} = {}) => {
+}: {
+	isProd?: boolean,
+	isTest?: boolean,
+	isDev?: boolean,
+	hmr?: boolean,
+	analyze?: boolean,
+	useBabelrc?: boolean,
+	app?: string,
+	config?: IAppConfig,
+	packageConfig?: any,
+	chunks?: string[],
+} = {}): baseWebpack.Configuration => {
 	console.log(`Project root path: ${chalk.blue(projectRoot)}`);
 	console.log(`Running app name: ${chalk.blue(app)}`);
 	console.log(`Env isProd: ${chalk.blue(isProd as any)}`);
@@ -134,7 +147,7 @@ export const webpackConfigFactory = ({
 			],
 			hot: hmr,
 		},
-		devtool: isProd ? 'none' : 'cheap-eval-source-map', // https://webpack.js.org/configuration/devtool/
+		devtool: (isProd ? false : 'cheap-eval-source-map') as baseWebpack.Options.Devtool, // https://webpack.js.org/configuration/devtool/
 		resolve: {
 			extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
 			modules: [...config.moduleImportPaths, config.rootPath, 'node_modules'],

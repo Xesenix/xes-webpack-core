@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import * as path from 'path';
 
 export interface IAppConfig {
@@ -108,17 +109,27 @@ export const projectRoot = path.resolve('./');
 export const getEnvApp = () => process.env.APP || 'app';
 
 /**
- * Get project package.json content.
+ * For caching extracted package.json.
  */
-// tslint:disable:no-var-requires
-export const packageConfig: any = require(path.resolve(projectRoot, './package.json'));
+let packageConfig: any;
+
+/**
+ * Get project package.json content.
+ * @param force reload package.json from disc
+ */
+export const getPackageConfig: any = (force: boolean = false) => {
+	if (force || !packageConfig) {
+		packageConfig = JSON.parse(fs.readFileSync(path.resolve(projectRoot, './package.json'), { encoding: 'utf-8' }));
+	}
+	return packageConfig;
+};
 
 /**
  * Creates helper for extracting one of application configuration values from package.json apps[app] field.
  *
  * @param string app application configuration key
  */
-export const retrievePackageAppConfig = (app: string, packageJson: any) =>
+export const retrievePackageAppConfig = (app: string, packageJson: any = getPackageConfig()) =>
 	packageJson.apps && packageJson.apps[app]
 		? (key: string, defaultValue: any) =>
 				packageJson.apps[app][key]
@@ -136,7 +147,7 @@ export const retrievePackageAppConfig = (app: string, packageJson: any) =>
 export const extractAppConfig = ({
 	app = getEnvApp(),
 	getConfigFactory = retrievePackageAppConfig,
-	packageJson = packageConfig,
+	packageJson = getPackageConfig(),
 } = {}): IAppConfig => {
 	const config: IAppConfig = { app } as IAppConfig;
 

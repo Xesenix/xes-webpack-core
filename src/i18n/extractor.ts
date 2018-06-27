@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { GettextExtractor, HtmlExtractors, JsExtractors } from 'gettext-extractor';
+import { GettextExtractor, JsExtractors } from 'gettext-extractor';
 import { JsParser } from 'gettext-extractor/dist/js/parser';
 import * as mkdirp from 'mkdirp';
 import * as path from 'path';
