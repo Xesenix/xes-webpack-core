@@ -40,6 +40,11 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
  */
 import HtmlCriticalPlugin from 'html-critical-webpack-plugin';
 
+/**
+ * For minifying production CSS.
+ */
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+
 import { assetsRulesFactory } from './loaders/assets';
 import { babelRulesFactory } from './loaders/babel';
 import { fontsRulesFactory } from './loaders/fonts';
@@ -82,7 +87,7 @@ export const webpackConfigFactory = ({
 	console.log(`Analyze: ${chalk.blue(analyze as any)}`);
 	console.log('App config:', config);
 
-	const extractCssPlugin = cssPluginFactory();
+	const extractCssPlugin = cssPluginFactory(isProd);
 
 	/**
 	 * Setup generation of html template in which all scripts and styles are included.
@@ -135,6 +140,7 @@ export const webpackConfigFactory = ({
 	};
 
 	const webpackConfig = {
+		mode: isProd ? 'production' : 'development',
 		entry,
 		externals,
 		output: {
@@ -239,39 +245,30 @@ export const webpackConfigFactory = ({
 			isProd ? new UglifyJsPlugin() : null,
 
 			/**
-			 * This plugin will cause the relative path of the module to be displayed when HMR is enabled. Suggested for use in development.
-			 * @see https://webpack.js.org/plugins/named-modules-plugin/
-			 *
-			 * Also needed for testing with rewiremock
-			 * @see https://github.com/theKashey/rewiremock#to-run-inside-webpack-enviroment
-			 */
-			isDev || hmr || isTest ? new baseWebpack.NamedModulesPlugin() : null,
-
-			/**
 			 * Coding without reloading pages requires this plugin.
 			 *
 			 * Additionally it is required for testing with rewiremock.
 			 * @see https://github.com/theKashey/rewiremock#to-run-inside-webpack-enviroment
 			 */
 			isDev && hmr ? new baseWebpack.HotModuleReplacementPlugin() : null,
-
-			/**
-			 * Use the NoEmitOnErrorsPlugin to skip the emitting phase whenever there are errors while compiling.
-			 * This ensures that no assets are emitted that include errors. The emitted flag in the stats is false for all assets.
-			 */
-			isTest ? null : new baseWebpack.NoEmitOnErrorsPlugin(),
-
-			/**
-			 * For splitting scripts coming from node_modules into separate chunk `vendor`
-			 * @todo: to be removed in webpack 4
-			 */
-			isTest
-				? null
-				: new baseWebpack.optimize.CommonsChunkPlugin({
-						name: 'vendor',
-						minChunks: ({ resource }: { resource: string }) => /node_modules/.test(resource),
-					}),
 		].filter((p) => !!p),
+		optimization: {
+			namedModules: isDev || hmr || isTest,
+			splitChunks: {
+				name: 'vendor',
+				minChunks: ({ resource }: { resource: string }) => /node_modules/.test(resource),
+			},
+			noEmitOnErrors: isTest,
+			concatenateModules: false,
+			minimizer: [
+				new UglifyJsPlugin({
+					cache: true,
+					parallel: true,
+					sourceMap: true, // set to true if you want JS source maps
+				}),
+				new OptimizeCSSAssetsPlugin({}),
+			],
+		},
 	};
 
 	return webpackConfig;
