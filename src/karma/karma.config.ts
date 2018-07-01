@@ -1,6 +1,6 @@
 import { Config, ConfigOptions } from 'karma';
 import * as path from 'path';
-import { Configuration, NewModule, Rule } from 'webpack';
+import { Configuration, Module, RuleSetRule } from 'webpack';
 
 import { extractAppConfig, IAppConfig } from '../app/app.config';
 import { istanbulCoverageFactory } from '../webpack/loaders/istanbul-coverage';
@@ -14,22 +14,24 @@ export const configure = (
 
 	// add required configuration for webpack
 	if (!webpack.module) {
-		webpack.module = {} as NewModule;
+		webpack.module = {} as Module;
 	}
 
-	if (!(webpack.module as NewModule).rules) {
-		(webpack.module as NewModule).rules = [];
+	if (!webpack.module.rules) {
+		webpack.module.rules = [];
 	}
 
-	(webpack.module as NewModule).rules.push(
-		...(istanbulCoverageFactory(config.rootPath) as [Rule]),
+	webpack.module.rules.push(
+		...(istanbulCoverageFactory(config.rootPath) as [RuleSetRule]),
 	);
 
 	/**
 	 * cheap-module-source-map - fixing react cross origin suggested in:
 	 * @see https://reactjs.org/docs/cross-origin-errors.html
 	 */
-	if (useReactSourceMapFix) webpack.devtool = 'cheap-module-source-map';
+	if (useReactSourceMapFix) {
+		webpack.devtool = 'cheap-module-source-map';
+	}
 
 	const options: ConfigOptions & {
 		webpack?: Configuration

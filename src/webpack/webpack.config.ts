@@ -1,4 +1,3 @@
-console.log('=== webpack');
 import chalk from 'chalk';
 import * as path from 'path';
 import * as pathExists from 'path-exists';
@@ -39,6 +38,11 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
  * @see https://survivejs.com/webpack/styling/eliminating-unused-css/#critical-path-rendering
  */
 import HtmlCriticalPlugin from 'html-critical-webpack-plugin';
+
+/**
+ * For minifying production CSS.
+ */
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 
 import { assetsRulesFactory } from './loaders/assets';
 import { babelRulesFactory } from './loaders/babel';
@@ -82,7 +86,7 @@ export const webpackConfigFactory = ({
 	console.log(`Analyze: ${chalk.blue(analyze as any)}`);
 	console.log('App config:', config);
 
-	const extractCssPlugin = cssPluginFactory();
+	const extractCssPlugin = cssPluginFactory(isProd);
 
 	/**
 	 * Setup generation of html template in which all scripts and styles are included.
@@ -97,8 +101,9 @@ export const webpackConfigFactory = ({
 		template: `!!ejs-loader!${config.rootDir}/${config.template}`,
 		inject: true,
 		// order of injected style tags
-		chunksSortMode: (a: { names: string[] }, b: { names: string[] }) =>
-			chunks.indexOf(a.names[0]) > chunks.indexOf(b.names[0]) ? 1 : -1,
+		// TODO: confirm that this typescipt arguments types are correct
+		chunksSortMode: (a: { id: string, parents: string[] }, b: { id: string, parents: string[] }) =>
+			chunks.indexOf(a.parents[0]) > chunks.indexOf(b.parents[0]) ? 1 : -1,
 		minify: {
 			removeComments: true,
 			preserveLineBreaks: true,
@@ -135,6 +140,7 @@ export const webpackConfigFactory = ({
 	};
 
 	const webpackConfig = {
+		mode: (isProd ? 'production' : 'development') as 'development' | 'production' | 'none',
 		entry,
 		externals,
 		output: {
@@ -157,9 +163,8 @@ export const webpackConfigFactory = ({
 				...fontsRulesFactory(config.rootPath),
 				...assetsRulesFactory(config.rootPath),
 				...stylesRulesFactory(
-					extractCssPlugin,
-					isProd,
 					config.stylesImportPaths,
+					hmr,
 				),
 				...babelRulesFactory(useBabelrc),
 				...markdownRulesFactory(),
@@ -168,7 +173,7 @@ export const webpackConfigFactory = ({
 		},
 		plugins: [
 			isTest ? null : htmlPlugin,
-			isTest ? null : extractCssPlugin,
+			extractCssPlugin,
 			!isProd ? null : htmlCriticalPlugin,
 			new baseWebpack.LoaderOptionsPlugin({
 				minimize: isProd,
@@ -233,45 +238,30 @@ export const webpackConfigFactory = ({
 				: null,
 
 			/**
-			 * Tree shaking minification and other optimizations.
-			 * @see https://github.com/webpack-contrib/uglifyjs-webpack-plugin
-			 */
-			isProd ? new UglifyJsPlugin() : null,
-
-			/**
-			 * This plugin will cause the relative path of the module to be displayed when HMR is enabled. Suggested for use in development.
-			 * @see https://webpack.js.org/plugins/named-modules-plugin/
-			 *
-			 * Also needed for testing with rewiremock
-			 * @see https://github.com/theKashey/rewiremock#to-run-inside-webpack-enviroment
-			 */
-			isDev || hmr || isTest ? new baseWebpack.NamedModulesPlugin() : null,
-
-			/**
 			 * Coding without reloading pages requires this plugin.
 			 *
 			 * Additionally it is required for testing with rewiremock.
 			 * @see https://github.com/theKashey/rewiremock#to-run-inside-webpack-enviroment
 			 */
 			isDev && hmr ? new baseWebpack.HotModuleReplacementPlugin() : null,
-
-			/**
-			 * Use the NoEmitOnErrorsPlugin to skip the emitting phase whenever there are errors while compiling.
-			 * This ensures that no assets are emitted that include errors. The emitted flag in the stats is false for all assets.
-			 */
-			isTest ? null : new baseWebpack.NoEmitOnErrorsPlugin(),
-
-			/**
-			 * For splitting scripts coming from node_modules into separate chunk `vendor`
-			 * @todo: to be removed in webpack 4
-			 */
-			isTest
-				? null
-				: new baseWebpack.optimize.CommonsChunkPlugin({
-						name: 'vendor',
-						minChunks: ({ resource }: { resource: string }) => /node_modules/.test(resource),
-					}),
 		].filter((p) => !!p),
+		optimization: {
+			namedModules: isDev || hmr || isTest,
+			splitChunks: {
+				name: 'vendor',
+				// minChunks: ({ resource }: { resource: string }) => /node_modules/.test(resource) ? 1 : 0,
+			},
+			noEmitOnErrors: isTest,
+			concatenateModules: false,
+			minimizer: [
+				new UglifyJsPlugin({
+					cache: true,
+					parallel: true,
+					sourceMap: true, // set to true if you want JS source maps
+				}),
+				new OptimizeCSSAssetsPlugin({}),
+			],
+		},
 	};
 
 	return webpackConfig;

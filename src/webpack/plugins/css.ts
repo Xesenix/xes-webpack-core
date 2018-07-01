@@ -1,6 +1,6 @@
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export const cssPluginFactory = (config: any = {}) => new ExtractTextPlugin({
-	filename: 'css/[name].css',
+export const cssPluginFactory = (isProd: boolean, config: any = {}) => new MiniCssExtractPlugin({
+	filename: isProd ? 'css/[name].[hash].css' : 'css/[name].css',
 	...config,
 });

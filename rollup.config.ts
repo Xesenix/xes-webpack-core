@@ -22,13 +22,13 @@ export default {
 	external: [
 		'webpack',
 		'html-webpack-plugin',
-		'extract-text-webpack-plugin',
 		'uglifyjs-webpack-plugin',
 		'dotenv-webpack',
 		'clean-webpack-plugin',
 		'copy-webpack-plugin',
 		'webpack-bundle-analyzer',
 		'html-critical-webpack-plugin',
+		'webpack',
 		'webpack-merge',
 		'rewiremock',
 		'rewiremock/webpack/plugin',
@@ -43,6 +43,8 @@ export default {
 		'babel-plugin-transform-decorators-legacy',
 		'babel-plugin-transform-class-properties',
 		'babel-plugin-transform-object-rest-spread',
+		'mini-css-extract-plugin',
+		'optimize-css-assets-webpack-plugin',
 	],
 	watch: {
 		include: 'src/**',
