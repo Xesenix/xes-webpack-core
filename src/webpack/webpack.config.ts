@@ -1,4 +1,3 @@
-console.log('=== webpack');
 import chalk from 'chalk';
 import * as path from 'path';
 import * as pathExists from 'path-exists';

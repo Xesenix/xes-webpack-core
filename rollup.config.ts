@@ -22,7 +22,6 @@ export default {
 	external: [
 		'webpack',
 		'html-webpack-plugin',
-		'extract-text-webpack-plugin',
 		'uglifyjs-webpack-plugin',
 		'dotenv-webpack',
 		'clean-webpack-plugin',
