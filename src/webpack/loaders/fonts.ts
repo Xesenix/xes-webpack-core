@@ -1,7 +1,7 @@
 import * as path from 'path';
-import { Rule } from 'webpack';
+import { RuleSetRule } from 'webpack';
 
-export const fontsRulesFactory = (srcRoot: string): Rule[] => {
+export const fontsRulesFactory = (srcRoot: string): RuleSetRule[] => {
 	const assetPath = path.normalize(srcRoot + '/assets/');
 	const fontsPath = path.normalize(srcRoot + '/fonts/');
 	const vendorRegExp = /node_modules(\\|\/)([^\\\/]+)/;

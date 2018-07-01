@@ -1,6 +1,6 @@
-import { Rule } from 'webpack';
+import { RuleSetRule } from 'webpack';
 
-export const markdownRulesFactory = (): Rule[] => [{
+export const markdownRulesFactory = (): RuleSetRule[] => [{
 	test: /\.md$/,
 	use: [
 		{	loader: 'html-loader', },

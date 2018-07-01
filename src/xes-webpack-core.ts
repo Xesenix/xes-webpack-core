@@ -1,3 +1,6 @@
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import webpack from 'webpack';
+
 import * as application from './app/app.config';
 
 import * as karma from './karma/karma.config';
@@ -12,7 +15,7 @@ import { shaderRulesFactory } from './webpack/loaders/shaders';
 import { stylesRulesFactory } from './webpack/loaders/styles';
 import { cssPluginFactory } from './webpack/plugins/css';
 
-import * as webpack from './webpack/webpack.config';
+import * as webpackConfigurator from './webpack/webpack.config';
 
 import * as i18n from './i18n/extractor';
 
@@ -21,7 +24,7 @@ const library = {
 	i18n,
 	karma,
 	webpack: {
-		...webpack,
+		...webpackConfigurator,
 		loaders: {
 			assetsRulesFactory,
 			babelRulesFactory,

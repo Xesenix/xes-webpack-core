@@ -1,7 +1,11 @@
 import * as path from 'path';
-import { Rule } from 'webpack';
+import { RuleSetRule } from 'webpack';
 
-export const assetsRulesFactory = (srcRoot: string): Rule[] => {
+/**
+ * Generate webpack rules for loading graphical assets.
+ * @param srcRoot path to graphic sources
+ */
+export const assetsRulesFactory = (srcRoot: string): RuleSetRule[] => {
 	const assetPath = path.normalize(srcRoot + '/assets/');
 	return [
 		{

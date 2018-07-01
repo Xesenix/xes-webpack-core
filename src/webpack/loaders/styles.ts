@@ -1,14 +1,18 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { Rule } from 'webpack';
+import { RuleSetRule } from 'webpack';
 
+/**
+ * Requires MiniCssExtractPlugin in webpack plugins on production.
+ * @param includePaths paths used to resolve @imports in sass files
+ * @param hmr decides if method should generate production setup
+ */
 export const stylesRulesFactory = (
-	extractCssPlugin: any,
-	isProd: boolean,
 	includePaths: string[] = ['./src/styles'],
-): Rule[] => [{
+	hmr: boolean = false,
+): RuleSetRule[] => [{
 	test: /\.s?css$/,
 	use: [
-		isProd ? MiniCssExtractPlugin.loader : { loader: 'style-loader', options: { sourceMap: true } }, // required for HMR
+		!hmr ? MiniCssExtractPlugin.loader : { loader: 'style-loader', options: { sourceMap: true } }, // required for HMR
 		{ loader: 'css-loader', options: { sourceMap: true, import: true } },
 		{ loader: 'sass-loader', options: { sourceMap: true, includePaths } },
 	],

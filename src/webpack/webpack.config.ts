@@ -102,8 +102,9 @@ export const webpackConfigFactory = ({
 		template: `!!ejs-loader!${config.rootDir}/${config.template}`,
 		inject: true,
 		// order of injected style tags
-		chunksSortMode: (a: { names: string[] }, b: { names: string[] }) =>
-			chunks.indexOf(a.names[0]) > chunks.indexOf(b.names[0]) ? 1 : -1,
+		// TODO: confirm that this typescipt arguments types are correct
+		chunksSortMode: (a: { id: string, parents: string[] }, b: { id: string, parents: string[] }) =>
+			chunks.indexOf(a.parents[0]) > chunks.indexOf(b.parents[0]) ? 1 : -1,
 		minify: {
 			removeComments: true,
 			preserveLineBreaks: true,
@@ -140,7 +141,7 @@ export const webpackConfigFactory = ({
 	};
 
 	const webpackConfig = {
-		mode: isProd ? 'production' : 'development',
+		mode: (isProd ? 'production' : 'development') as 'development' | 'production' | 'none',
 		entry,
 		externals,
 		output: {
@@ -163,9 +164,8 @@ export const webpackConfigFactory = ({
 				...fontsRulesFactory(config.rootPath),
 				...assetsRulesFactory(config.rootPath),
 				...stylesRulesFactory(
-					extractCssPlugin,
-					isProd,
 					config.stylesImportPaths,
+					hmr,
 				),
 				...babelRulesFactory(useBabelrc),
 				...markdownRulesFactory(),
@@ -174,7 +174,7 @@ export const webpackConfigFactory = ({
 		},
 		plugins: [
 			isTest ? null : htmlPlugin,
-			isTest ? null : extractCssPlugin,
+			extractCssPlugin,
 			!isProd ? null : htmlCriticalPlugin,
 			new baseWebpack.LoaderOptionsPlugin({
 				minimize: isProd,
@@ -239,12 +239,6 @@ export const webpackConfigFactory = ({
 				: null,
 
 			/**
-			 * Tree shaking minification and other optimizations.
-			 * @see https://github.com/webpack-contrib/uglifyjs-webpack-plugin
-			 */
-			isProd ? new UglifyJsPlugin() : null,
-
-			/**
 			 * Coding without reloading pages requires this plugin.
 			 *
 			 * Additionally it is required for testing with rewiremock.
@@ -256,7 +250,7 @@ export const webpackConfigFactory = ({
 			namedModules: isDev || hmr || isTest,
 			splitChunks: {
 				name: 'vendor',
-				minChunks: ({ resource }: { resource: string }) => /node_modules/.test(resource),
+				// minChunks: ({ resource }: { resource: string }) => /node_modules/.test(resource) ? 1 : 0,
 			},
 			noEmitOnErrors: isTest,
 			concatenateModules: false,

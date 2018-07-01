@@ -1,10 +1,10 @@
-import { Rule } from 'webpack';
+import { RuleSetRule } from 'webpack';
 
 /**
  * Builds configuration for loading source files with use of babel.
  * @param babelrc determines if we want to read configuration from .babelrc file
  */
-export const babelRulesFactory = (babelrc = false): Rule[] => [{
+export const babelRulesFactory = (babelrc = false): RuleSetRule[] => [{
 	test: /\.(t|j)sx?$/,
 	exclude: /(node_modules|bower_components)/,
 	use: {
