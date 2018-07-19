@@ -128,7 +128,7 @@
 		"@types/path-exists": "^3.0.0",
 		"@types/react": "^16.0.38",
 		"@types/react-dom": "^16.0.4",
-		"@types/react-hot-loader": "^3.0.6",
+		"@types/react-hot-loader": "^4.1.0",
 		"@types/react-test-renderer": "^16.0.1",
 		"@types/uglifyjs-webpack-plugin": "^1.1.0",
 		"@types/webpack": "^4.4.4",
@@ -204,7 +204,7 @@
 	"optionalDependencies": {
 		"react": "^16.0.0",
 		"react-dom": "^16.0.0",
-		"react-hot-loader": "^4.0.0",
+		"react-hot-loader": "^4.3.3",
 		"react-test-renderer": "^16.2.0"
 	}
 }
