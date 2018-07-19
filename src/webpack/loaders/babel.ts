@@ -37,7 +37,9 @@ export const babelRulesFactory = (babelrc = false): RuleSetRule[] => [{
 				'@babel/preset-stage-3',
 			],
 			plugins: [
-				require('babel-plugin-transform-decorators-legacy'),
+				[require('@babel/plugin-proposal-decorators'), {
+					legacy: true,
+				}],
 				require('@babel/plugin-proposal-class-properties'),
 				require('@babel/plugin-proposal-object-rest-spread'),
 			],
