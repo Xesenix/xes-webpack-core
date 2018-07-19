@@ -9,7 +9,10 @@ export const babelRulesFactory = (babelrc = false): RuleSetRule[] => [{
 	exclude: /(node_modules|bower_components)/,
 	use: {
 		loader: 'babel-loader',
-		options: {
+		options: babelrc ? {
+			babelrc,
+			compact: false,
+		} : {
 			babelrc,
 			compact: false,
 			presets: [
