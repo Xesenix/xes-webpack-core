@@ -153,7 +153,7 @@
 		"enzyme-matchers": "^4.2.0",
 		"file-loader": "^1.1.9",
 		"font-awesome": "^4.7.0",
-		"gettext-extractor": "^3.3.1",
+		"gettext-extractor": "^3.3.2",
 		"glslify": "^6.1.1",
 		"html-critical-webpack-plugin": "^1.1.0",
 		"html-loader": "^0.5.5",
