@@ -50,16 +50,18 @@ export default {
 		include: 'src/**',
 	},
 	plugins: [
-		// Compile TypeScript files
-		typescript({ useTsconfigDeclarationDir: true }),
-		// Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
-		commonjs(),
 		/**
 		 * Allow node_modules resolution, so you can use 'external' to control
 		 * which external modules to include in the bundle
 		 * @see https://github.com/rollup/rollup-plugin-node-resolve#usage
+		 * order of plugins may be important
+		 * @see https://github.com/ezolenko/rollup-plugin-typescript2/issues/66#issuecomment-378735446
 		 */
 		resolve(),
+		// Compile TypeScript files
+		typescript({ useTsconfigDeclarationDir: true, rollupCommonJSResolveHack: true }),
+		// Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
+		commonjs(),
 		/**
 		 * Allows the node builtins (path, fs etc.) to be required/imported.
 		 *
