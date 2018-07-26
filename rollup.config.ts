@@ -10,7 +10,7 @@ const camelCase = require('lodash.camelcase');
 
 const pkg = require('./package.json');
 
-const libraryName = 'xes-webpack-core';
+const libraryName = 'index';
 
 export default {
 	input: `src/${libraryName}.ts`,
