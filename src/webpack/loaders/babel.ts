@@ -34,14 +34,13 @@ export const babelRulesFactory = (babelrc = false): RuleSetRule[] => [{
 				}],
 				'@babel/preset-react',
 				'@babel/preset-typescript',
-				'@babel/preset-stage-3',
 			],
 			plugins: [
-				[require('@babel/plugin-proposal-decorators'), {
+				require('@babel/plugin-syntax-dynamic-import'),
+				[require('@babel/plugin-syntax-decorators'), {
 					legacy: true,
 				}],
-				require('@babel/plugin-proposal-class-properties'),
-				require('@babel/plugin-proposal-object-rest-spread'),
+				require('@babel/plugin-syntax-object-rest-spread'),
 			],
 			env: {
 				test: {
@@ -57,7 +56,6 @@ export const babelRulesFactory = (babelrc = false): RuleSetRule[] => [{
 						}],
 						'@babel/preset-react',
 						'@babel/preset-typescript',
-						'@babel/preset-stage-3',
 					],
 				},
 			},
