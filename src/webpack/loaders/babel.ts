@@ -37,7 +37,7 @@ export const babelRulesFactory = (babelrc = false): RuleSetRule[] => [{
 			],
 			plugins: [
 				require('@babel/plugin-syntax-dynamic-import'),
-				[require('@babel/plugin-syntax-decorators'), {
+				[require('@babel/plugin-proposal-decorators'), {
 					legacy: true,
 				}],
 				require('@babel/plugin-syntax-object-rest-spread'),
