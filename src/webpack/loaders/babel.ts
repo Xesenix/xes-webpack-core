@@ -41,6 +41,7 @@ export const babelRulesFactory = (babelrc = false): RuleSetRule[] => [{
 					legacy: true,
 				}],
 				require('@babel/plugin-syntax-object-rest-spread'),
+				require('@babel/plugin-proposal-class-properties'),
 			],
 			env: {
 				test: {
