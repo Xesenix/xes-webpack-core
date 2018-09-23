@@ -24,7 +24,7 @@ export const configure = (
 	webpack.module.rules.push(
 		...(istanbulCoverageFactory([
 			config.rootPath,
-			...config.externalDirs,
+			...config.externalPaths,
 		]) as [RuleSetRule]),
 	);
 

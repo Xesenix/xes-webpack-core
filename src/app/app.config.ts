@@ -28,6 +28,11 @@ export interface IAppConfig {
 	rootPath: string;
 
 	/**
+	 * System path to additional paths to look for tests and for translation.
+	 */
+	externalPaths: string[];
+
+	/**
 	 * System path to build destination.
 	 */
 	outPath: string;
@@ -162,6 +167,10 @@ export const extractAppConfig = ({
 	config.rootPath = path.normalize(path.resolve(projectRoot, config.rootDir));
 	config.outPath = path.normalize(path.resolve(projectRoot, config.outDir));
 
+	// project external paths
+	config.externalDirs = get('externalDirs', []).map(fixPaths);
+	config.externalPaths = config.externalDirs.map((p: string) => path.normalize(path.resolve(projectRoot, p)));
+
 	// modules lookup paths
 	config.moduleImportPaths = get('moduleImportPaths', []).map(fixPaths);
 	config.stylesImportPaths = get('stylesImportPaths', [
@@ -189,7 +198,6 @@ export const extractAppConfig = ({
 		fixPathRegExp,
 		'/',
 	);
-	config.externalDirs = get('externalDirs', []).map(fixPaths);
 
 	return config;
 };
