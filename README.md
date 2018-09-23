@@ -40,6 +40,7 @@ If anywhere in you code exist one of those phrases it will be replaced with data
 | __process.env.APP.externalDirs__ | string[] | [] | `package.apps.[appName].externalDirs` |
 | __process.env.APP.outDir__ | string | _dist_ | `package.apps.[appName].outDir` |
 | __process.env.APP.rootPath__ | string | | resolved system path to `package.apps.[appName].rootDir` |
+| __process.env.APP.externalPaths__ | string[] | [] | resolved system path to `package.apps.[appName].externalDirs` |
 | __process.env.APP.outPath__ | string | | resolved system path to `package.apps.[appName].outDir` |
 | __process.env.APP.main__ | string[] | | application entry scripts defined in `package.apps.[appName].main` |
 | __process.env.APP.test__ | string | | application test entry script defined in `package.apps.[appName].test` |
