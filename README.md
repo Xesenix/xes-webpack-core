@@ -11,6 +11,7 @@ You can provide application configuration via _package.json_ `apps` param:
 | __param__ | __default__ | __description__
 | --- | --- | --- |
 | __package.apps.[appName].rootDir__ | src | directory (relative to project root) where all source code and other assets resides
+| __package.apps.[appName].externalDirs__ | [] | additional directories outside of `package.apps.[appName].rootDir` in which we have source files that need to be tested or translated
 | __package.apps.[appName].outDir__ | dist | directory (relative to project root) in which to put builded application
 | __package.apps.[appName].main__ | ['main.js'] | entry points to your application (relative to `package.apps.[appName].rootDir`)
 | __package.apps.[appName].moduleImportPaths__ | [''] | list of paths (relative to project root) on which to look for imported modules when calling `import` or `require` directives
@@ -36,6 +37,7 @@ If anywhere in you code exist one of those phrases it will be replaced with data
 | __process.env.PACKAGE__ | _object_ | | contents of _package.json_ |
 | __process.env.APP__ | _object_ | | application build configuration resolved from build context |
 | __process.env.APP.rootDir__ | string | _src_ | `package.apps.[appName].rootDir` |
+| __process.env.APP.externalDirs__ | string[] | [] | `package.apps.[appName].externalDirs` |
 | __process.env.APP.outDir__ | string | _dist_ | `package.apps.[appName].outDir` |
 | __process.env.APP.rootPath__ | string | | resolved system path to `package.apps.[appName].rootDir` |
 | __process.env.APP.outPath__ | string | | resolved system path to `package.apps.[appName].outDir` |

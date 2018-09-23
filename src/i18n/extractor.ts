@@ -25,7 +25,7 @@ export const configureJsParser = (
 ]);
 
 /**
- * Go trough localesExtractDirs and application root and extract
+ * Go trough externalDirs and application root and extract
  */
 export const extractFromScripts = (
 	parser: JsParser,
@@ -36,7 +36,7 @@ export const extractFromScripts = (
 	console.log(`App: ${chalk.blue(config.app)}`);
 
 	// loop through paths for which to extract localization functions
-	[config.rootDir, ...config.localesExtractDirs].forEach((p: string) => {
+	[config.rootDir, ...config.externalDirs].forEach((p: string) => {
 		console.log(`Searching for segments from: ${chalk.blue(p)}`);
 		parser.parseFilesGlob(path.join(p, './**/*.@(ts|js|tsx|jsx)'), {
 			ignore: '**/*.spec.*',

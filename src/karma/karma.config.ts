@@ -22,7 +22,10 @@ export const configure = (
 	}
 
 	webpack.module.rules.push(
-		...(istanbulCoverageFactory(config.rootPath) as [RuleSetRule]),
+		...(istanbulCoverageFactory([
+			config.rootPath,
+			...config.externalDirs,
+		]) as [RuleSetRule]),
 	);
 
 	/**
@@ -89,7 +92,7 @@ export const configure = (
 
 		coverageIstanbulReporter: {
 			reports: ['html', 'lcovonly', 'text-summary'],
-			dir: path.resolve('./coverage'),
+			dir: path.resolve('./coverage', config.app),
 			fixWebpackSourcePaths: true,
 		},
 

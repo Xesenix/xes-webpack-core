@@ -13,6 +13,11 @@ export interface IAppConfig {
 	rootDir: string;
 
 	/**
+	 * Additional paths to look for tests and to translate.
+	 */
+	externalDirs: string[];
+
+	/**
 	 * Destination path for build result.
 	 */
 	outDir: string;
@@ -74,11 +79,6 @@ export interface IAppConfig {
 	 * List of languages that will be used by application
 	 */
 	languages: string[];
-
-	/**
-	 * List of paths relative to project root from which to extract translations
-	 */
-	localesExtractDirs: string[];
 
 	/**
 	 * Directory for storing translations (relative to package.apps.[appName].rootDir)
@@ -189,7 +189,7 @@ export const extractAppConfig = ({
 		fixPathRegExp,
 		'/',
 	);
-	config.localesExtractDirs = get('localesExtractDirs', []).map(fixPaths);
+	config.externalDirs = get('externalDirs', []).map(fixPaths);
 
 	return config;
 };

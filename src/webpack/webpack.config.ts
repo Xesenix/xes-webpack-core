@@ -101,7 +101,7 @@ export const webpackConfigFactory = ({
 		template: `!!ejs-loader!${config.rootDir}/${config.template}`,
 		inject: true,
 		// order of injected style tags
-		// TODO: confirm that this typescipt arguments types are correct
+		// TODO: confirm that this typescript arguments types are correct
 		chunksSortMode: (a: { id: string, parents: string[] }, b: { id: string, parents: string[] }) =>
 			chunks.indexOf(a.parents[0]) > chunks.indexOf(b.parents[0]) ? 1 : -1,
 		minify: {
@@ -145,7 +145,7 @@ export const webpackConfigFactory = ({
 		externals,
 		output: {
 			path: config.outPath,
-			filename: '[name].boundle.js',
+			filename: '[name].bundle.js',
 		},
 		devServer: {
 			contentBase: [
