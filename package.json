@@ -145,7 +145,7 @@
 		"coveralls": "^3.0.0",
 		"css-loader": "^0.28.10",
 		"dotenv-webpack": "^1.5.7",
-		"ejs-loader": "^0.3.0",
+		"ejs-loader": "^0.3.3",
 		"enzyme": "^3.3.0",
 		"enzyme-adapter-react-16": "^1.1.1",
 		"enzyme-matchers": "^4.2.0",
