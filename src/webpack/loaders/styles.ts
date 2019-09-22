@@ -12,8 +12,8 @@ export const stylesRulesFactory = (
 ): RuleSetRule[] => [{
 	test: /\.s?css$/,
 	use: [
-		!hmr ? MiniCssExtractPlugin.loader : { loader: 'style-loader', options: { sourceMap: true } }, // required for HMR
+		!hmr ? MiniCssExtractPlugin.loader : { loader: 'style-loader', options: { } }, // required for HMR
 		{ loader: 'css-loader', options: { sourceMap: true, import: true } },
-		{ loader: 'sass-loader', options: { sourceMap: true, includePaths } },
+		{ loader: 'sass-loader', options: { sourceMap: true, sassOptions: { includePaths } } },
 	],
 }];
