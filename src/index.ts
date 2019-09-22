@@ -1,6 +1,3 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import webpack from 'webpack';
-
 import * as application from './app/app.config';
 
 import * as karma from './karma/karma.config';
@@ -19,7 +16,7 @@ import * as webpackConfigurator from './webpack/webpack.config';
 
 import * as i18n from './i18n/extractor';
 
-const library = {
+export default {
 	application,
 	i18n,
 	karma,
@@ -39,6 +36,4 @@ const library = {
 			cssPluginFactory,
 		},
 	},
-};
-
-export default library;
+} as any;

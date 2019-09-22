@@ -21,7 +21,7 @@ import DotenvWebpackPlugin from 'dotenv-webpack';
 /**
  * Clean up destination directory.
  */
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 /**
  * Copy assets and fonts.
@@ -206,10 +206,7 @@ export const webpackConfigFactory = ({
 					),
 			!isProd
 				? null
-				: new CleanWebpackPlugin([config.outPath], {
-						root: projectRoot,
-						verbose: isDev,
-					}),
+				: new CleanWebpackPlugin(),
 			new DotenvWebpackPlugin({ path: '.env', silent: true }),
 			new baseWebpack.EnvironmentPlugin({
 				NODE_ENV: isProd ? 'production' : isTest ? 'test' : 'development',
