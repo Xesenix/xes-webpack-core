@@ -34,6 +34,16 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 /**
+ * Analyze dependencies duplicates.
+ */
+import { DuplicatesPlugin } from 'inspectpack/plugin';
+
+/**
+ * Add ability to observe module download progress.
+ */
+import ChunkProgressWebpackPlugin from 'chunk-progress-webpack-plugin';
+
+/**
  * Order scripts and styles increasing startup speed noticable in google analytics.
  * @see https://survivejs.com/webpack/styling/eliminating-unused-css/#critical-path-rendering
  */
@@ -53,6 +63,7 @@ import { stylesRulesFactory } from './loaders/styles';
 import { cssPluginFactory } from './plugins/css';
 
 import { extractAppConfig, getEnvApp, getPackageConfig, IAppConfig, projectRoot } from '../app/app.config';
+import { getEnvConfiguration } from '../environment/environment.config';
 
 export const webpackConfigFactory = ({
 	isProd = process.env.ENV === 'production',
@@ -66,6 +77,7 @@ export const webpackConfigFactory = ({
 	packageConfig = getPackageConfig(),
 	// order of chunks is important for style overriding (more specific styles source later)
 	chunks = ['vendor', 'styles', 'main'],
+	env = getEnvConfiguration(process.env.ENV || 'app', app),
 }: {
 	isProd?: boolean,
 	isTest?: boolean,
@@ -77,6 +89,7 @@ export const webpackConfigFactory = ({
 	config?: IAppConfig,
 	packageConfig?: any,
 	chunks?: string[],
+	env?: any,
 } = {}): baseWebpack.Configuration => {
 	console.log(`Project root path: ${chalk.blue(projectRoot)}`);
 	console.log(`Running app name: ${chalk.blue(app)}`);
@@ -85,6 +98,12 @@ export const webpackConfigFactory = ({
 	console.log(`Env isDev: ${chalk.blue(isDev as any)}`);
 	console.log(`Analyze: ${chalk.blue(analyze as any)}`);
 	console.log('App config:', config);
+
+	const processEnv = Object.entries(env).reduce((result, [key, value]) => {
+		result[`process.env.${key}`] = JSON.stringify(value);
+
+		return result;
+	}, {} as any);
 
 	const extractCssPlugin = cssPluginFactory(isProd);
 
@@ -97,6 +116,7 @@ export const webpackConfigFactory = ({
 		data: {
 			title: `${packageConfig.name} - ${packageConfig.version}`,
 			...config.templateData,
+			env,
 		},
 		template: `!!ejs-loader!${config.rootDir}/${config.template}`,
 		inject: true,
@@ -172,6 +192,7 @@ export const webpackConfigFactory = ({
 			],
 		},
 		plugins: [
+			new baseWebpack.DefinePlugin(processEnv),
 			isTest ? null : htmlPlugin,
 			extractCssPlugin,
 			!isProd ? null : htmlCriticalPlugin,
@@ -241,6 +262,8 @@ export const webpackConfigFactory = ({
 			 * @see https://github.com/theKashey/rewiremock#to-run-inside-webpack-enviroment
 			 */
 			isDev && hmr ? new baseWebpack.HotModuleReplacementPlugin() : null,
+			new DuplicatesPlugin(),
+			new ChunkProgressWebpackPlugin(),
 		].filter((p) => !!p),
 		optimization: {
 			namedModules: isDev || hmr || isTest,

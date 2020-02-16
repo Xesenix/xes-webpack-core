@@ -1,5 +1,7 @@
 import * as application from './app/app.config';
 
+import * as environment from './environment/environment.config';
+
 import * as karma from './karma/karma.config';
 
 import { assetsRulesFactory } from './webpack/loaders/assets';
@@ -18,6 +20,7 @@ import * as i18n from './i18n/extractor';
 
 export default {
 	application,
+	environment,
 	i18n,
 	karma,
 	webpack: {
