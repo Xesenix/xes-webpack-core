@@ -171,7 +171,7 @@
 		"mini-css-extract-plugin": "^0.4.5",
 		"mkdirp": "^0.5.1",
 		"node-gettext": "^2.0.0",
-		"node-sass": "^4.13.1",
+		"node-sass": "^7.0.1",
 		"optimize-css-assets-webpack-plugin": "^5.0.3",
 		"parallel-webpack": "^2.4.0",
 		"path-exists": "^4.0.0",
@@ -188,7 +188,7 @@
 		"webpack": "^4.41.6",
 		"webpack-bundle-analyzer": "^3.6.0",
 		"webpack-cli": "^3.3.11",
-		"webpack-dev-server": "^3.10.3",
+		"webpack-dev-server": "^4.0.0",
 		"webpack-merge": "^4.2.2"
 	},
 	"optionalDependencies": {
